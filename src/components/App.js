@@ -14,6 +14,15 @@ class App extends Component {
     filter: ""
   };
 
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts') !== null ? JSON.parse(localStorage.getItem('contacts')):[];
+    this.setState({contacts})
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts))
+  }
+
   submitContact = data => {
     const isNameExist = this.state.contacts.some(
       contact => contact.name === data.name
